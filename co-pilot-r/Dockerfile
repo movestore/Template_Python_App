@@ -17,6 +17,14 @@ COPY renv/activate.R ./renv/
 ENV RENV_VERSION 0.14.0
 RUN R -e "install.packages('remotes', repos = c(CRAN = 'https://cloud.r-project.org'))"
 RUN R -e "remotes::install_github('rstudio/renv@${RENV_VERSION}')"
+# the R packages needed by the base image
 RUN R -e 'renv::restore()'
 
+# the R packages needed by this specific app
+RUN R -e 'remotes::install_version("lubridate")'
+
+# take a snapshot of all R dependencies
+RUN R -e 'renv::snapshot()'
+
+# start the MoveApps app
 ENTRYPOINT ["./start-process.sh"]
