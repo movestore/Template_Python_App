@@ -23,7 +23,7 @@ cp sample-data/$SAMPLE_INPUT $LOCAL_SHARE_DIR
 
 > :warning: Make sure docker can access `$LOCAL_SHARE_DIR` (Docker Desktop: Settings > Resources > File Sharing)
 
-Provide input data and app configuration during runtime and start the app:
+Provide input data (`SOURCE_FILE`) and app configuration (`CONFIGURATION`) via environment variables and start the app:
 
 ```
 docker run -v $LOCAL_SHARE_DIR:/tmp -e SOURCE_FILE=/tmp/$SAMPLE_INPUT -e OUTPUT_FILE=/tmp/output.rds -e CONFIGURATION='{"year":2014}' co-pilot-r-sdk
@@ -31,4 +31,4 @@ docker run -v $LOCAL_SHARE_DIR:/tmp -e SOURCE_FILE=/tmp/$SAMPLE_INPUT -e OUTPUT_
 
 ### Expected Result
 
-`ls $LOCAL_SHARE_DIR` should listen the generated output file `output.rds` (and in this case also `hello_world.pdf`).
+`ls $LOCAL_SHARE_DIR` should list the app output file `output.rds` (and in this case also `hello_world.pdf`).
