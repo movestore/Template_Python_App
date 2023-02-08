@@ -2,7 +2,7 @@ import unittest
 import os
 from tests.config.definitions import ROOT_DIR
 from app.app import App
-from co_pilot.moveapps_io import MoveAppsIo
+from sdk.moveapps_io import MoveAppsIo
 import pandas as pd
 import movingpandas as mpd
 

@@ -6,7 +6,7 @@ hook_spec = pluggy.HookspecMarker(HOOK_NAMESPACE)
 hook_impl = pluggy.HookimplMarker(HOOK_NAMESPACE)
 
 
-class CoPilotSpec(object):
+class MoveAppsSpec(object):
     @hook_spec
     def execute(self, data: TrajectoryCollection, config: dict) -> TrajectoryCollection:
         """Execute your business logic

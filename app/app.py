@@ -1,4 +1,4 @@
-from co_pilot.co_pilot_spec import hook_impl
+from sdk.moveapps_spec import hook_impl
 from movingpandas import TrajectoryCollection
 import logging
 

@@ -1,7 +1,7 @@
 import os
 from unittest import TestCase
 from tests.config.definitions import ROOT_DIR
-from co_pilot.moveapps_io import MoveAppsIo
+from sdk.moveapps_io import MoveAppsIo
 
 
 class TestMoveAppsIo(TestCase):
