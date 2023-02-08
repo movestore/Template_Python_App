@@ -6,6 +6,11 @@ MoveApps
 
 Github repository: *github.com/yourAccount/Name-of-App* *(the link to the repository where the code of the app can be found must be provided)*
 
+## SDK
+
+As an **app developer** you should have a look into the [SDK onboarding document](sdk-onboarding.md). 
+*Please delete this section for your final app documentation*
+
 ## Description
 *Enter here the short description of the App that might also be used when filling out the description when submitting the App to Moveapps. This text is directly presented to Users that look through the list of Apps when compiling Workflows.*
 
