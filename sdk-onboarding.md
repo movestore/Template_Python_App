@@ -75,5 +75,5 @@ Nothing else.
 
 1. create the conda environment by `conda env create -n APP_NAME --file environment.yml`
 1. execute `python sdk.py`
-1. ensure the sdk executes the vanilla template app code. Everything works it no error occurs and you see something like _Welcome to the MoveApps Python SDK._
+1. ensure the sdk executes the vanilla template app code. Everything is set up correctly if no error occurs and you see something like _Welcome to the MoveApps Python SDK._
 1. begin with your app development in `./app/app.py`
