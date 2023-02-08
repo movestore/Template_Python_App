@@ -10,7 +10,7 @@ RUN micromamba install -y -n base -f /tmp/env.yaml && \
 ENV PROJECT_DIR /moveapps-python-sdk
 WORKDIR $PROJECT_DIR
 COPY --chown=$MAMBA_USER:$MAMBA_USER sdk.py ./
-COPY --chown=$MAMBA_USER:$MAMBA_USER co_pilot/ ./co_pilot/
+COPY --chown=$MAMBA_USER:$MAMBA_USER sdk/ ./sdk/
 COPY --chown=$MAMBA_USER:$MAMBA_USER resources/ ./resources/
 COPY --chown=$MAMBA_USER:$MAMBA_USER tests/ ./tests/
 COPY --chown=$MAMBA_USER:$MAMBA_USER app/ ./app/
