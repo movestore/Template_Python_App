@@ -1,0 +1,9 @@
+name: moveapps-python-sdk
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pandas
+  - geopandas
+  - movingpandas
+  - pluggy

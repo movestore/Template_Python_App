@@ -1,0 +1,64 @@
+import os
+import pandas as pd
+import movingpandas as mpd
+
+
+class InputConverter:
+
+    def csv_to_pickle(self, csv_path, result_file_name):
+        print(os.getcwd())
+
+        pandas = self.read_data_csv(file_path=f'{csv_path}/buffer.csv')
+        timezone = self.read_timezone(file_path=f'{csv_path}/meta.csv')
+        projection = self.read_projection(file_path=f'{csv_path}/meta.csv')
+
+        self.adjust_timestamps(data=pandas, timezone=timezone)
+        movingpandas = self.create_moving_pandas(data=pandas, projection=projection)
+        self.write_result(file_name=result_file_name, data=movingpandas)
+
+    def read_data_csv(self, file_path):
+        csv = pd.read_csv(
+            file_path,
+            parse_dates=['timestamp'],
+        )
+        print(csv.info())
+        return csv
+
+    def read_timezone(self, file_path):
+        meta_csv = pd.read_csv(file_path)
+        tzone = meta_csv['tzone'][0]
+        return tzone
+
+    def read_projection(self, file_path):
+        meta_csv = pd.read_csv(file_path)
+        projection = meta_csv['crs'][0]
+        return projection
+
+    def adjust_timestamps(self, data, timezone):
+        data['timestamp_tz'] = data['timestamp'].apply(lambda x: x.tz_localize(timezone))
+        print('applied timezone', timezone)
+        print(data.head())
+
+    def create_moving_pandas(self, data, projection):
+        move = mpd.TrajectoryCollection(
+            data,
+            traj_id_col='individual.local.identifier',
+            crs=projection,
+            t='timestamp_tz',  # use our converted timezone column
+            x='location.long',
+            y='location.lat'
+        )
+        print(move)
+        return move
+
+    def write_result(self, file_name, data):
+        print(type(data))
+        pd.to_pickle(data, file_name)
+
+
+if __name__ == '__main__':
+    converter = InputConverter()
+    converter.csv_to_pickle(
+        csv_path="./resources/input/input4",
+        result_file_name="./resources/input/input4/converted.pickle"
+    )

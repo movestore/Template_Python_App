@@ -1,0 +1,45 @@
+{
+  "settings": [],
+  "providedAppFiles": [],
+  "createsArtifacts": false,
+  "license": {
+    "key": "MIT"
+  },
+  "language": "eng",
+  "keywords": [
+    "example",
+    "template"
+  ],
+  "people": [
+    {
+      "firstName": "Charles",
+      "middleInitials": null,
+      "lastName": "Darwin",
+      "email": "creator@example.com",
+      "roles": [
+        "author",
+        "creator"
+      ],
+      "orcid": null,
+      "affiliation": null,
+      "affiliationRor": null
+    }
+  ],
+  "funding": [
+    {
+      "name": "funder name",
+      "comment": "grant for App"
+    }
+  ],
+  "references": [
+    {
+      "type": "IsDescribedBy",
+      "note": "Darwin, C. 1900. The creation. Journal XY. 1-2",
+      "url": "https://anylink.xyz"
+    }
+  ],
+  "documentation": {
+    "url": "https://github.com/yourAccount/my-app/README.md"
+  }
+}
+
