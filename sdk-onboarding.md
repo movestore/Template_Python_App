@@ -79,3 +79,75 @@ Nothing else.
 1. execute `python sdk.py`
 1. ensure the sdk executes the vanilla template app code. Everything is set up correctly if no error occurs and you see something like _Welcome to the MoveApps Python SDK._
 1. begin with your app development in `./app/app.py`
+
+
+## Examples
+
+### Request app configuration from your users
+
+`./appspec.json`: define the settings UI on MoveApps. Users of your app can enter their configuration values.
+
+```
+"settings": [
+ {
+   "id": "line_width",
+   "name": "Line width",
+   "description": "The width of the lines in the plot.",
+   "defaultValue": 2,
+   "type": "INTEGER"
+ },
+ {
+   "id": "legend",
+   "name": "Include legend?",
+   "description": "Should the plot contain a legend?",
+   "defaultValue": false,
+   "type": "CHECKBOX"
+ }
+],
+```
+
+`./app-configuration.json`: this is only needed during the app development to simulate an app run
+
+```
+{
+  "line_width": 2,
+  "legend": true
+}
+```
+
+`./app/app.py`: your app will be called with the users app configuration
+
+```
+@dataclass
+class AppConfig:
+    line_width: int
+    with_legend: bool
+
+class App(object):
+   @staticmethod
+    def map_config(config: dict):
+        return AppConfig(
+            line_width=config['line_width'] if 'line_width' in config else 5,
+            with_legend=config['legend'] if 'legend' in config else False
+        )
+   
+    @hook_impl
+    def execute(self, data: TrajectoryCollection, config: dict) -> TrajectoryCollection:
+        app_config = self.map_config(config=config)
+        # [..]
+```
+
+`./tests/app/test_app.py`: do not forget to test it
+
+```
+def test_app_config_mapping_defaults(self):
+   # prepare
+   config = {}
+
+   # execute
+   actual = self.sut.map_config(config=config)
+
+   # verify
+   self.assertEqual(5, actual.line_width)
+   self.assertFalse(actual.with_legend)
+```
