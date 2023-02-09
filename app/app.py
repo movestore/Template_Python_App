@@ -11,6 +11,6 @@ class App(object):
     @hook_impl
     def execute(self, data: TrajectoryCollection, config: dict) -> TrajectoryCollection:
         """Your app code goes here"""
-        logging.info('Welcome to the MoveApps Python SDK.')
+        logging.info(f'Welcome to the {config}')
         # return some useful data for next apps in the workflow
         return data

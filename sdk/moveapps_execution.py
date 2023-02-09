@@ -3,11 +3,13 @@ import json
 import os
 import logging
 import pluggy
+from dotenv import load_dotenv
 
 
 class MoveAppsExecutor:
 
     def __init__(self, plugin_manager: pluggy.PluginManager):
+        load_dotenv()
         self._pm = plugin_manager
 
     def execute(self):
@@ -31,8 +33,12 @@ class MoveAppsExecutor:
 
     @staticmethod
     def load_config():
-        config = os.environ.get('CONFIGURATION', '{}')
-        parsed = json.loads(config)
+        if os.environ['CONFIGURATION_FILE']:
+            with open(os.environ['CONFIGURATION_FILE']) as config_file:
+                parsed = json.load(config_file)
+        else:
+            config = os.environ.get('CONFIGURATION', '{}')
+            parsed = json.loads(config)
         if os.environ.get("PRINT_CONFIGURATION", "no") == "yes":
             logging.info(f'app will be started with configuration: {parsed}')
         return parsed

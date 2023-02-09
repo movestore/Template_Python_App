@@ -7,3 +7,4 @@ dependencies:
   - geopandas
   - movingpandas
   - pluggy
+  - python-dotenv
