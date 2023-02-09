@@ -55,11 +55,13 @@ Keep in mind that these variables are only changeable during app development and
 They are predefined with sensible defaults - they should just work for you.
 
 - `SOURCE_FILE`: path to input file for your app
-- `CONFIGURATION`: configuration of your app (json - must match the `settings` of your `appspec.json`)
+- `CONFIGURATION_FILE`: configuration of your app (json - must correspondent with the `settings` of your `appspec.json`)
 - `PRINT_CONFIGURATION`: prints the configuration your app receives
 - `LOCAL_APP_FILES_DIR`: base directory of your local app files (*auxiliary*)
 - `OUTPUT_FILE`: path to output file of your app
 - `APP_ARTIFACTS_DIR`: base directory to for writing app artifacts
+
+You can adjust these environment variables by adjusting the file `./.env`.
 
 ## MoveApps App Bundle
 
