@@ -156,6 +156,12 @@ def test_app_config_mapping_defaults(self):
 
 Your app can write files which the user can download after an app run
 
+`./appspec.json`
+
+```
+  "createsArtifacts": true,
+```
+
 `./app/app.py`
 
 ```
