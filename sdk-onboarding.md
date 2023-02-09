@@ -151,3 +151,19 @@ def test_app_config_mapping_defaults(self):
    self.assertEqual(5, actual.line_width)
    self.assertFalse(actual.with_legend)
 ```
+
+### Produce an app artefact
+
+Your app can write files which the user can download after an app run
+
+`./app/app.py`
+
+```
+plot = data.plot(
+   column="speed",
+   linewidth=app_config.line_width,
+   capstyle='round',
+   legend=app_config.with_legend
+)
+plot.figure.savefig(self.moveapps_io.create_artifacts_file('plot.png'))
+```
