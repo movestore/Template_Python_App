@@ -4,6 +4,14 @@ import os
 import logging
 import pluggy
 from dotenv import load_dotenv
+from dataclasses import dataclass
+
+
+@dataclass
+class Environment:
+    source_file: str
+    output_file: str
+    app_configuration: dict
 
 
 class MoveAppsExecutor:
@@ -13,26 +21,32 @@ class MoveAppsExecutor:
         self._pm = plugin_manager
 
     def execute(self):
-        self.configure_logging()
-        config = self.load_config()
-        data = self.load_input()
-        output = self.call_app(data, config)
-        self.store_output(output)
+        self.__configure_logging()
+        self.__load_environment()
+        data = self.__load_input()
+        output = self.__call_app(data)
+        self.__store_output(output)
+
+    def __load_environment(self):
+        self.env = Environment(
+            source_file=os.environ.get('SOURCE_FILE', 'resources/samples/input1.pickle'),
+            output_file=os.environ.get('OUTPUT_FILE', 'resources/output/output.pickle'),
+            app_configuration=self.__load_config()
+        )
 
     @staticmethod
-    def configure_logging():
+    def __configure_logging():
         logging.basicConfig(
             level=logging.INFO,
             format='%(message)s',
             datefmt='%Y-%m-%d %H:%M:%S'
         )
 
-    @staticmethod
-    def load_input():
-        return pd.read_pickle(os.environ.get('SOURCE_FILE', 'resources/samples/input1.pickle'))
+    def __load_input(self):
+        return pd.read_pickle(self.env.source_file)
 
     @staticmethod
-    def load_config():
+    def __load_config():
         if os.environ['CONFIGURATION_FILE']:
             with open(os.environ['CONFIGURATION_FILE']) as config_file:
                 parsed = json.load(config_file)
@@ -43,11 +57,10 @@ class MoveAppsExecutor:
             logging.info(f'app will be started with configuration: {parsed}')
         return parsed
 
-    @staticmethod
-    def store_output(data):
+    def __store_output(self, data):
         logging.info(f'storing output: {data}')
-        pd.to_pickle(data, os.environ.get('OUTPUT_FILE', 'resources/output/output.pickle'))
+        pd.to_pickle(data, self.env.output_file)
 
-    def call_app(self, data, config):
-        outputs = self._pm.hook.execute(data=data, config=config)
+    def __call_app(self, data):
+        outputs = self._pm.hook.execute(data=data, config=self.env.app_configuration)
         return outputs[0]
