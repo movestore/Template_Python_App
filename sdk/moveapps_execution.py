@@ -47,7 +47,7 @@ class MoveAppsExecutor:
 
     @staticmethod
     def __load_config():
-        if os.environ['CONFIGURATION_FILE']:
+        if 'CONFIGURATION_FILE' in os.environ:
             with open(os.environ['CONFIGURATION_FILE']) as config_file:
                 parsed = json.load(config_file)
         else:
