@@ -8,7 +8,7 @@ Github repository: *github.com/yourAccount/Name-of-App* *(the link to the reposi
 
 ## SDK
 
-As an **app developer** you should have a look into the [SDK onboarding document](sdk-onboarding.md). 
+As an **App developer** you should have a look into the [developer README document](developer_README.md). 
 *Please delete this section for your final app documentation*
 
 ## Description
