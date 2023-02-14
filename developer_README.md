@@ -52,7 +52,7 @@ This template is designed according to a file structure that is necessary for yo
 
 ## App Development
 
-As mentioned MoveApps will call your custom App business logic in `app.app.py`. It will instantiate the class `App`. So do not alter the class name or the file name.
+As mentioned MoveApps will call your custom App business logic in `app/app.py`. It will instantiate the class `App`. So do not alter the class name or the file name.
 
 The SDK calls so called `hook`s. These hooks must be implemented by the App. Currently, there is only the following [hook specified](sdk/moveapps_spec.py) in `./sdk/moveapps_spec.py`:
 
@@ -193,4 +193,37 @@ plot = data.plot(
    legend=app_config.with_legend
 )
 plot.figure.savefig(self.moveapps_io.create_artifacts_file('plot.png'))
+```
+
+### Include files to your App
+
+You can include files to your final app. E.g. a directory containing files of a _Shapefile_.
+
+`./resources/local_app_files/provided-app-files/{file-set-identifier}`
+
+_We use `my-app-files` as `{file-set-identifier}` for this example. Also, we want to provide the simple file `provided-file.txt`._
+
+---
+
+`appspec.json`
+
+```
+"providedAppFiles": [
+ {
+   "settingId": "my-app-files",
+   "from": "resources/local_app_files/provided-app-files/my-app-files"
+ }
+],
+```
+
+Next store your necessary file(s) in the defined folder. For our example add the file `./resources/local_app_files/provided-app-files/my-app-files/provided-file.txt`
+
+Somewhere in you app code (like `./app/app.py`) you can access this file with the help of the SDK util method `moveapps_io.get_app_file_path()` like:
+
+```
+def _consume_app_file(self):
+    app_file_base_dir = self.moveapps_io.get_app_file_path('my-app-files')
+    if app_file_base_dir:
+        expected_file = os.path.join(app_file_root_dir, 'provided-file.txt')
+        # do something with this file
 ```
