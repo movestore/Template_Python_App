@@ -106,6 +106,8 @@ Nothing else.
 
 `./appspec.json`: define the settings UI on MoveApps. Users of your App can enter their configuration values.
 
+![img.png](documentation/app-configuration-ui.png)
+
 ```
 "settings": [
  {
