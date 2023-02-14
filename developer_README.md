@@ -201,11 +201,11 @@ You can include files to your final app. E.g. a directory containing files of a 
 
 `./resources/local_app_files/provided-app-files/{file-set-identifier}`
 
-_We use `my-app-files` as `{file-set-identifier}` for this example. Also, we want to provide the simple file `provided-file.txt`._
+_We use `my-app-files` as `{file-set-identifier}` for this example. Also, we want to provide the simple file `the-file.txt`._
 
 ---
 
-`appspec.json`
+`./appspec.json`
 
 ```
 "providedAppFiles": [
@@ -216,7 +216,7 @@ _We use `my-app-files` as `{file-set-identifier}` for this example. Also, we wan
 ],
 ```
 
-Next store your necessary file(s) in the defined folder. For our example add the file `./resources/local_app_files/provided-app-files/my-app-files/provided-file.txt`
+Next store your necessary file(s) in the defined folder. For our example add the file `./resources/local_app_files/provided-app-files/my-app-files/the-file.txt`
 
 Somewhere in you app code (like `./app/app.py`) you can access this file with the help of the SDK util method `moveapps_io.get_app_file_path()` like:
 
@@ -224,6 +224,51 @@ Somewhere in you app code (like `./app/app.py`) you can access this file with th
 def _consume_app_file(self):
     app_file_base_dir = self.moveapps_io.get_app_file_path('my-app-files')
     if app_file_base_dir:
-        expected_file = os.path.join(app_file_root_dir, 'provided-file.txt')
+        expected_file = os.path.join(app_file_root_dir, 'the-file.txt')
         # do something with this file
 ```
+
+### Let the user upload files to you App
+
+Sometimes it is useful that the user of your App can upload its own files during runtime. The SDK provides a way to access these uploaded files.
+
+With this mechanism it is also possible to let the user _overwrite_ your provided app files. Therefor we will extend the previous example in the following.
+
+`./appspec.json`
+
+```
+"providedAppFiles": [
+ {
+   "settingId": "my-app-files",
+   "from": "resources/local_app_files/provided-app-files/my-app-files"
+ }
+],
+"settings": [
+ {
+   "id": "my-app-files",
+   "name": "Upload your own file",
+   "description": "You can provide your own file. Expected file name is `the-file.txt`",
+   "defaultValue": null,
+   "type": "LOCAL_FILE"
+ }
+]
+```
+
+![img.png](documentation/app-configuration-local-file.png)
+
+By using the same helper method for loading the app-file we can use the uploaded file:
+
+```
+def _consume_app_file(self):
+    app_file_base_dir = self.moveapps_io.get_app_file_path('my-app-files')
+    if app_file_base_dir:
+        expected_file = os.path.join(app_file_root_dir, 'the-file.txt')
+        # do something with this file
+```
+
+The rules are:
+
+1. If the user uploaded the expected file the App uses it
+1. If the user did not upload the expected file and you as the app developer provided the file the App uses the provided one
+
+_In short: files from the users wins over files provided by the app developer_
