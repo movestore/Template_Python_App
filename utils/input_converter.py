@@ -9,7 +9,7 @@ class InputConverter:
     def csv_to_pickle(self, csv_path, result_file_name):
         print(os.getcwd())
 
-        pandas = self.read_data_csv(file_path=f'{csv_path}/buffer.csv')
+        pandas = self.read_data_csv(file_path=f'{csv_path}/link.csv')
         timezone = self.read_timezone(file_path=f'{csv_path}/meta.csv')
         projection = self.read_projection(file_path=f'{csv_path}/meta.csv')
 
