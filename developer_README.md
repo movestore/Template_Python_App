@@ -274,4 +274,4 @@ The rules are:
 
 _In short: files from the users win over files provided by the app developer_
 
-Note that, if neither the user uploaded the expected file, nor you as the App developer provided the file, the App might run into an error - depending on the code desing handling the return value of moveapps_io.get_app_file_path() in `./app/app.py`.
+Note that, if neither the user uploaded the expected file, nor you as the App developer provided the file, the App might run into an error - depending on the code desing handling the return value of `moveapps_io.get_app_file_path()` in `./app/app.py`.
