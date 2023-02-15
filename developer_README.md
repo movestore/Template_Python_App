@@ -50,24 +50,6 @@ This template is designed according to a file structure that is necessary for yo
 1. `./sdk.py`: The main entry point of the SDK. Use it to execute your App in your IDE
 1. `./tests/**`: Location for **Unit Tests**
 
-## App Development
-
-As mentioned MoveApps will call your custom App business logic in `app/app.py`. It will instantiate the class `App`. So do not alter the class name or the file name.
-
-The SDK calls so called `hook`s. These hooks must be implemented by the App. Currently, there is only the following [hook specified](sdk/moveapps_spec.py) in `./sdk/moveapps_spec.py`:
-
-```
-@hook_spec def execute(self, data: TrajectoryCollection, config: dict) -> TrajectoryCollection:
-```
-
-A [proper implementation](app/app.py) of this hook specification looks like this:
-
-```
-@hook_impl def execute(self, data: TrajectoryCollection, config: dict) -> TrajectoryCollection:
-   """Your app code goes here"""
-   return data
-```
-
 ## SDK Runtime environment
 
 Critical parts of the SDK can be adjusted by `environment variables`. 
@@ -99,6 +81,25 @@ Nothing else.
 1. Execute `python sdk.py`
 1. Ensure the sdk executes the vanilla template app code. Everything is set up correctly if no error occurs and you see something like _Welcome to the MoveApps Python SDK._
 1. Begin with your app development in `./app/app.py`
+
+---
+
+As mentioned MoveApps will call your custom App business logic in `./app/app.py`. It will instantiate the class `App`. So do not alter the class name or the file name.
+
+The SDK calls so called `hook`s. These hooks must be implemented by the App. Currently, there is only the following [hook specified in `./sdk/moveapps_spec.py`](sdk/moveapps_spec.py):
+
+```
+@hook_spec def execute(self, data: TrajectoryCollection, config: dict) -> TrajectoryCollection:
+```
+
+A [proper implementation](app/app.py) of this hook specification looks like this:
+
+```
+@hook_impl def execute(self, data: TrajectoryCollection, config: dict) -> TrajectoryCollection:
+   """Your app code goes here"""
+   return data
+```
+
 
 ## Examples
 
