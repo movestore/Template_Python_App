@@ -6,7 +6,7 @@ As a first step, and before your read this, you should have forked this GitHub t
 
 # Overview
 
-This template is designed according to a file structure that is necessary for your App to run in your local development environment similar to the way it will run in the MoveApps environment later. Please contain the structure and only change/add files as necessary for your App's functionality. See below which files can be changed and which should remain as is for simulation of the behaviour on MoveApps on your local system. A stepwise explanation below indicates the function and some of its background of each file and folder.
+This template is designed according to a file structure that is necessary for your App to run in your local development environment similar to the way it will run in the MoveApps environment later. Please contain the structure and only change/add files as necessary for your App's functionality. See below which files can be changed and which should remain as is for simulation of the behaviour on MoveApps on your local system. A stepwise explanation below indicates the function and some background of each file and folder.
 
 ## File structure
 
@@ -35,17 +35,17 @@ This template is designed according to a file structure that is necessary for yo
 │       └── output
 ```
 
-1. `./app/app.py`: This is the entrypoint for your App logic. MoveApps will call this class during a workflow execution which includes your app.
-**The class must be named `App` and the file must be named `./app/app.py`**, do not alter it!
+1. `./app/app.py`: This is the entrypoint for your App logic. MoveApps will call this class during a workflow execution which includes your App.
+**The class must be named `App` and the file must be named `./app/app.py`, do not alter it!**
 1. `./appspec.json`: This file defines the settings and metadata of your App, for details refer to the [MoveApps User Manual](https://docs.moveapps.org/#/appspec)
 1. `./environment.yml`: Definition of the dependencies of your App. We use `conda` as library manager.
 1. `./resources/**`: Resources of the SDK
    1. `local_app_files/**`: Simulates the usage of [*app files*](https://docs.moveapps.org/#/auxiliary). You can put files into this folder to simulate an App run with provided/user-uploaded files. 
    1. `output/**`: If your App produces [*artefacts*](https://docs.moveapps.org/#/copilot-r-sdk?id=artefacts) they will be stored here.
-   1. `samples/**`: Collection of sample App input data. You can use these samples to simulate a App run with real input.
+   1. `samples/**`: Collection of sample App input data. You can use these samples to simulate an App run with real input.
 1. `./sdk/**`: The (internal) MoveApps Python SDK logic.
    1. `moveapps_execution.py`: The logic for simulating an App run.
-   1. `moveapps_io.py`: Helper functions to use IO features of MoveApps Apps.
+   1. `moveapps_io.py`: Helper functions to use IO features of MoveApps.
    1. `moveapps_spec.py`: The python App specification each MoveApps Python App must implement
 1. `./sdk.py`: The main entry point of the SDK. Use it to execute your App in your IDE
 1. `./tests/**`: Location for **Unit Tests**
@@ -79,12 +79,12 @@ Nothing else.
 
 1. Create the conda environment by `conda env create -n APP_NAME --file environment.yml`
 1. Execute `python sdk.py`
-1. Ensure the sdk executes the vanilla template app code. Everything is set up correctly if no error occurs and you see something like _Welcome to the MoveApps Python SDK._
-1. Begin with your app development in `./app/app.py`
+1. Ensure the sdk executes the vanilla template App code. Everything is set up correctly if no error occurs and you see something like _Welcome to the MoveApps Python SDK._
+1. Begin with your App development in `./app/app.py`
 
 ---
 
-As mentioned MoveApps will call your custom App business logic in `./app/app.py`. It will instantiate the class `App`. So do not alter the class name or the file name.
+As mentioned, MoveApps will call your custom App business logic in `./app/app.py`. It will instantiate the class `App`. So do not alter the class name or the file name.
 
 The SDK calls so called `hook`s. These hooks must be implemented by the App. Currently, there is only the following [hook specified in `./sdk/moveapps_spec.py`](sdk/moveapps_spec.py):
 
@@ -198,7 +198,7 @@ plot.figure.savefig(self.moveapps_io.create_artifacts_file('plot.png'))
 
 ### Include files to your App
 
-You can include files to your final app. E.g. a directory containing files of a _Shapefile_.
+You can include files to your final App, e.g. a directory containing files of a _Shapefile_.
 
 `./resources/local_app_files/provided-app-files/{file-set-identifier}`
 
@@ -217,9 +217,9 @@ _We use `my-app-files` as `{file-set-identifier}` for this example. Also, we wan
 ],
 ```
 
-Next store your necessary file(s) in the defined folder. For our example add the file `./resources/local_app_files/provided-app-files/my-app-files/the-file.txt`
+Next, store your necessary file(s) in the defined folder. For our example add the file `./resources/local_app_files/provided-app-files/my-app-files/the-file.txt`
 
-Somewhere in you app code (like `./app/app.py`) you can access this file with the help of the SDK util method `moveapps_io.get_app_file_path()` like:
+Somewhere in you App code (like `./app/app.py`) you can access this file with the help of the SDK utility method `moveapps_io.get_app_file_path()` like:
 
 ```
 def _consume_app_file(self):
@@ -231,7 +231,7 @@ def _consume_app_file(self):
 
 ### Let the user upload files to your App
 
-Sometimes it is useful that the user of your App can upload its own files during runtime. The SDK provides a way to access these uploaded files.
+Sometimes it is useful that a MoveApps user working with your App can upload his/her own files during runtime. The SDK provides a way to access these uploaded files.
 
 With this mechanism it is also possible to let the user _overwrite_ your provided app files. Therefor we will extend the previous example in the following.
 
@@ -269,7 +269,9 @@ def _consume_app_file(self):
 
 The rules are:
 
-1. If the user uploaded the expected file the App uses it
-1. If the user did not upload the expected file and you as the app developer provided the file the App uses the provided one
+1. If the user uploaded the expected file, then the App uses it
+1. If the user did not upload the expected file and you as the App developer provided the file, then the App uses the provided file
 
-_In short: files from the users wins over files provided by the app developer_
+_In short: files from the users win over files provided by the app developer_
+
+Note that, if neither the user uploaded the expected file, nor you as the App developer provided the file, the App might run into an error - depending on the code desing handling the return value of moveapps_io.get_app_file_path() in `./app/app.py`.
