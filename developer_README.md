@@ -229,7 +229,7 @@ def _consume_app_file(self):
         # do something with this file
 ```
 
-### Let the user upload files to you App
+### Let the user upload files to your App
 
 Sometimes it is useful that the user of your App can upload its own files during runtime. The SDK provides a way to access these uploaded files.
 
