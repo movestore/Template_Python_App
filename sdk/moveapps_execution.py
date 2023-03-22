@@ -11,6 +11,7 @@ from dataclasses import dataclass
 class Environment:
     source_file: str
     output_file: str
+    error_file: str
     app_configuration: dict
 
 
@@ -21,16 +22,21 @@ class MoveAppsExecutor:
         self._pm = plugin_manager
 
     def execute(self):
-        self.__configure_logging()
-        self.__load_environment()
-        data = self.__load_input()
-        output = self.__call_app(data)
-        self.__store_output(output)
+        try:
+            self.__configure_logging()
+            self.__load_environment()
+            data = self.__load_input()
+            output = self.__call_app(data)
+            self.__store_output(output)
+        except Exception as exception:
+            self.__store_error(exception)
+            raise exception
 
     def __load_environment(self):
         self.env = Environment(
             source_file=os.environ.get('SOURCE_FILE', 'resources/samples/input1.pickle'),
             output_file=os.environ.get('OUTPUT_FILE', 'resources/output/output.pickle'),
+            error_file=os.environ.get('ERROR_FILE', 'resources/output/error.txt'),
             app_configuration=self.__load_config()
         )
 
@@ -60,6 +66,11 @@ class MoveAppsExecutor:
     def __store_output(self, data):
         logging.info(f'storing output: {data}')
         pd.to_pickle(data, self.env.output_file)
+
+    def __store_error(self, error: Exception):
+        logging.info(f'storing error to {self.env.error_file}')
+        with open(self.env.error_file, 'w') as error_file:
+            error_file.write(error.__str__())
 
     def __call_app(self, data):
         outputs = self._pm.hook.execute(data=data, config=self.env.app_configuration)
