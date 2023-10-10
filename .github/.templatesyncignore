@@ -1,0 +1,9 @@
+app/
+documentation/
+resources/local_app_files/
+sdk/tests/app/
+sdk/tests/resources/app/
+app-configuration.json
+appspec.json
+environment.yml
+README.md
