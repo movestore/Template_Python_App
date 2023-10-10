@@ -7,3 +7,6 @@ app-configuration.json
 appspec.json
 environment.yml
 README.md
+
+# misc
+.idea/
