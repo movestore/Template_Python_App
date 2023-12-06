@@ -43,8 +43,11 @@ class MoveAppsExecutor:
     @staticmethod
     def __configure_logging():
         logging.basicConfig(
-            level=logging.INFO,
-            format='%(message)s',
+            level=os.environ.get('LOG_LEVEL_PROCESS_PYTHON', 'INFO'),
+            format=os.environ.get(
+                'LOG_PATTERN_PROCESS_PYTHON',
+                '%(asctime)s.%(msecs)03d %(relativeCreated)6d [%(threadName)s] %(name)s %(levelname)s: %(message)s'
+            ),
             datefmt='%Y-%m-%d %H:%M:%S'
         )
 
