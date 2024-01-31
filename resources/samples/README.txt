@@ -1,5 +1,3 @@
-NOTE: missing datasets to be added soon!
-
 Set of input data to test apps.
 
 *Content*
@@ -13,7 +11,7 @@ Set of input data to test apps.
 
 
 *Projection*
-- data are provided in "lat/long" and projected to "Mollweide" in order to test your app accordingly for not projected and projected data. If your app does not allow projected data or only can deal with projected data, document and either build a automatic transformation in the app or make it fail with an informative error message. The app "Change projection" can be refered to for the user to change the projection of the data acordingly previous to your app.
+- data are provided in "lat/long" (EPSG:4326) and projected to "Mollweide" (ESRI:54009) in order to test your app accordingly for not projected and projected data. If your app does not allow projected data or only can deal with projected data, document and either build a automatic transformation in the app or make it fail with an informative error message. The app "Change projection" can be refered to for the user to change the projection of the data acordingly previous to your app.
 
 *File names*
 input1_LatLon.pickle
