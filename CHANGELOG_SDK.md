@@ -1,5 +1,11 @@
 # Changelog SDK
 
+## 2024-02 `v2.0.1`
+
+- introduce `appspec.json` version `1.2`
+    - removed `createsArtifacts`. It is safe to remove it completely from your `appspec.json` - MoveApps tries now to fetch artifacts for every running App.
+    - verify to include the `null` option for setting types `DROPDOWN` and `RADIOBUTTONS` if `defaultValue` is set to `null`.
+
 ## 2023-10 `v2.0.0`
 
 - introduces template versioning (starting w/ `v2.0.0` as this is the second major iteration)
