@@ -34,7 +34,7 @@ class MoveAppsExecutor:
 
     def __load_environment(self):
         self.env = Environment(
-            source_file=os.environ.get('SOURCE_FILE', 'resources/samples/input1.pickle'),
+            source_file=os.environ.get('SOURCE_FILE'),
             output_file=os.environ.get('OUTPUT_FILE', 'resources/output/output.pickle'),
             error_file=os.environ.get('ERROR_FILE', 'resources/output/error.txt'),
             app_configuration=self.__load_config()

@@ -17,7 +17,7 @@ This template is designed according to a file structure that is necessary for yo
 ├── appspec.json
 ├── environment.yml
 ├── resources
-│   ├── local_app_files
+│   ├── auxiliary
 │   ├── output
 │   └── samples
 │       └── input1.pickle
@@ -40,7 +40,7 @@ This template is designed according to a file structure that is necessary for yo
 1. `./appspec.json`: This file defines the settings and metadata of your App, for details refer to the [MoveApps User Manual](https://docs.moveapps.org/#/appspec)
 1. `./environment.yml`: Definition of the dependencies of your App. We use `conda` as library manager.
 1. `./resources/**`: Resources of the SDK
-   1. `local_app_files/**`: Simulates the usage of [*app files*](https://docs.moveapps.org/#/auxiliary). You can put files into this folder to simulate an App run with provided/user-uploaded files. 
+   1. `auxiliary/**`: Simulates the usage of [*auxiliary App files*](https://docs.moveapps.org/#/auxiliary). You can put files into this folder to simulate an App run with provided/user-uploaded files. 
    1. `output/**`: If your App produces [*artefacts*](https://docs.moveapps.org/#/copilot-r-sdk?id=artefacts) they will be stored here.
    1. `samples/**`: Collection of sample App input data. You can use these samples to simulate an App run with real input.
 1. `./sdk/**`: The (internal) MoveApps Python SDK logic.
@@ -59,7 +59,8 @@ They are predefined with sensible defaults - they should work for you as they ar
 - `SOURCE_FILE`: path to input file for your App
 - `CONFIGURATION_FILE`: configuration of your App (json - must correspondent with the `settings` of your `appspec.json`)
 - `PRINT_CONFIGURATION`: prints the configuration your App receives
-- `LOCAL_APP_FILES_DIR`: base directory of your local App files (*auxiliary*)
+- `USER_APP_FILE_HOME_DIR`: home aka base directory of your local user App files (*auxiliary*)
+- ~~`LOCAL_APP_FILES_DIR`~~: Deprecated! base directory of your local App files (*auxiliary*)
 - `OUTPUT_FILE`: path to output file of your App
 - `APP_ARTIFACTS_DIR`: base directory for writing App artifacts
 
@@ -203,7 +204,7 @@ plot.figure.savefig(self.moveapps_io.create_artifacts_file('plot.png'))
 
 You can include files to your final App, e.g. a directory containing files of a _Shapefile_.
 
-`./resources/local_app_files/provided-app-files/{file-set-identifier}`
+`./resources/auxiliary/user-files/{file-set-identifier}`
 
 _We use `my-app-files` as `{file-set-identifier}` for this example. Also, we want to provide the simple file `the-file.txt`._
 
@@ -215,12 +216,12 @@ _We use `my-app-files` as `{file-set-identifier}` for this example. Also, we wan
 "providedAppFiles": [
  {
    "settingId": "my-app-files",
-   "from": "resources/local_app_files/provided-app-files/my-app-files"
+   "from": "resources/auxiliary/user-files/my-app-files"
  }
 ],
 ```
 
-Next, store your necessary file(s) in the defined folder. For our example add the file `./resources/local_app_files/provided-app-files/my-app-files/the-file.txt`
+Next, store your necessary file(s) in the defined folder. For our example add the file `./resources/auxiliary/user-files/my-app-files/the-file.txt`
 
 Somewhere in you App code (like `./app/app.py`) you can access this file with the help of the SDK utility method `moveapps_io.get_app_file_path()` like:
 
@@ -244,7 +245,7 @@ With this mechanism it is also possible to let the user _overwrite_ your provide
 "providedAppFiles": [
  {
    "settingId": "my-app-files",
-   "from": "resources/local_app_files/provided-app-files/my-app-files"
+   "from": "resources/auxiliary/user-files/my-app-files"
  }
 ],
 "settings": [
