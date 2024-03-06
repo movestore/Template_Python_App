@@ -7,6 +7,7 @@ from sdk.moveapps_io import MoveAppsIo
 class TestMoveAppsIo(TestCase):
 
     def setUp(self) -> None:
+        os.environ['APP_ARTIFACTS_DIR'] = os.path.join(ROOT_DIR, 'tests/resources/output')
         self.sut = MoveAppsIo()
 
     def test_create_artifacts_file(self):
@@ -14,4 +15,11 @@ class TestMoveAppsIo(TestCase):
         actual = self.sut.create_artifacts_file('artifact-file.xyz')
 
         # verify
-        self.assertEqual('./resources/output/artifact-file.xyz', actual)
+        self.assertEqual(
+            os.path.join(
+                ROOT_DIR,
+                'tests/resources/output',
+                'artifact-file.xyz'
+            ),
+            actual
+        )
