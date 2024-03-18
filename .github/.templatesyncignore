@@ -1,6 +1,6 @@
 app/
 documentation/
-resources/local_app_files/
+resources/auxiliary/
 sdk/tests/app/
 sdk/tests/resources/app/
 app-configuration.json

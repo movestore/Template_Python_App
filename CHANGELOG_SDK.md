@@ -1,5 +1,10 @@
 # Changelog SDK
 
+## 2024-03 `v2.1.0`
+
+- introduce app-setting-type `USER_FILE`
+- deprecate app-setting-type `LOCAL_FILE`
+
 ## 2024-02 `v2.0.1`
 
 - introduce `appspec.json` version `1.2`
