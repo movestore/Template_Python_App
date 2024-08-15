@@ -18,17 +18,18 @@ Here you find an overview of the files and their function in the SDK.
 1. `./environment.yml`: Definition of the dependencies of your App. We use `conda` as library manager. See [Step 7](https://docs.moveapps.org/#/create_py_app?id=step-7-store-environment-dependencies) in the User Manual.
 1. `./resources/**`: Resources of the SDK
    1. `auxiliary/**`: Simulates the usage of [*auxiliary files*](https://docs.moveapps.org/#/auxiliary). You can put files into this folder to simulate an App run with provided/user-uploaded files. 
-   1. `output/**`: If your App produces output files (artifacts) they will be stored here. See [*producing artifacts*](https://docs.moveapps.org/#/copilot-python-sdk?id=producing-app-artifacts) for more information.
+   1. `output/**`: If your App produces output files (artifacts) they will be stored here. See [*producing artifacts*](https://docs.moveapps.org/#/copilot-python-sdk?id=producing-artifacts) for more information.
    1. `samples/**`: Collection of sample App input data. You can use these samples to simulate an App run with real input.
 1. `./sdk/**`: The (internal) MoveApps Python SDK logic.
    1. `moveapps_execution.py`: The logic for simulating an App run.
    1. `moveapps_io.py`: Helper functions to use IO features of MoveApps.
    1. `moveapps_spec.py`: The Python App specification each MoveApps Python App must implement
-1. `./sdk.py`: The main entry point of the SDK. Use it to execute your App in your compiler.
+1. `./sdk.py`: The main entry point of the SDK. Use it to execute your App in your compiler (e.g. PyCharm).
 1. `./tests/**`: Location for *Unit Tests*. See [Step 5](https://docs.moveapps.org/#/create_py_app#=step-5-test-your-app-locally) of the User Manual.
+1. `.env`: defining the SDK Runtime environment, see below.
 
 
-## SDK Runtime environment
+## SDK untime environment
 
 Critical parts of the SDK can be adjusted by `environment variables`. Keep in mind that these variables are only changeable during App development and not during an App run on MoveApps. They are predefined with sensible defaults - they should work for you as they are.
 
@@ -48,6 +49,9 @@ Which files will be bundled into the final App running on MoveApps?
 
 Nothing else.
 
+Note that many App features will be set and updated with information from the `appspec.json` in each new App version. Thus, even if not bundled into the App, this file is required and must be up to date.
+
+You are also required to write a documentation file (see [Step 8](https://docs.moveapps.org/#/create_app#step-8-write-a-documentation-file) in the User Manual).
 
 ## Synchronization of your App repository with this template
 
