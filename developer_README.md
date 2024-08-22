@@ -23,7 +23,7 @@ Here you find an overview of the files and their function in the SDK:
 1. `.env`: adjust for App testing. defining the SDK Runtime environment, see below.
 1. `./resources/**`: use for App testing. Resources of the SDK
    1. `auxiliary/**`: Simulates the usage of [*auxiliary files*](https://docs.moveapps.org/#/auxiliary). You can put files into this folder to simulate an App run with provided/user-uploaded files. 
-   1. `output/**`: The output data (`output.rds`) that will be passed on to the next App in a Workflow and other output files (artifacts) that your App may produce will be stored here. See [*producing artifacts*](https://docs.moveapps.org/#/copilot-python-sdk?id=producing-artifacts) for more information.
+   1. `output/**`: The output data (`output.pickle`) that will be passed on to the next App in a Workflow and other output files (artifacts) that your App may produce will be stored here. See [*producing artifacts*](https://docs.moveapps.org/#/copilot-python-sdk?id=producing-artifacts) for more information.
    1. `samples/**`: Collection of sample App input data. You can use these data to test an App run with real input.
 
 
