@@ -18,7 +18,7 @@ Here you find an overview of the files and their function in the SDK:
 1. `./environment.yml`: must be modified by the developer. Definition of the dependencies of your App. We use `conda` as library manager. See [Step 7](https://docs.moveapps.org/#/create_py_app?id=step-7-store-environment-dependencies) in the User Manual.
 1. `./README.md`: must be modified by the developer. Provided template for the documentation of the App (see [Step 8](https://docs.moveapps.org/#/create_py_app?id=step-8-write-a-documentation-file) in the User Manual).
 1. `./tests/**`: must be modified by the developer. Location for *Unit Tests*. See [Step 5](https://docs.moveapps.org/#/create_py_app#=step-5-test-your-app-locally) of the User Manual.
-1. `./sdk.py`: use for App testing. The main entry point of the SDK. Use it to execute your App in your compiler (e.g. PyCharm).
+1. `./sdk.py`: use for App testing. The main entrypoint of the SDK. Use it to execute your App in your compiler (e.g. PyCharm).
 1. `./app-configuration.json`: adjust for App testing. The configuration/settings file of your App (in [JSON](https://www.w3schools.com/js/js_json_intro.asp) format - must correspondent with the `settings` of your `appspec.json`, see [MoveApps parameters](https://docs.moveapps.org/#/copilot-python-sdk.md#moveapps-parameters) for an example).
 1. `.env`: adjust for App testing. defining the SDK Runtime environment, see below.
 1. `./resources/**`: use for App testing. Resources of the SDK
