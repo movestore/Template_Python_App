@@ -1,19 +1,18 @@
-FROM mambaorg/micromamba:1.2.0-bullseye-slim
+FROM condaforge/miniforge3:latest
 LABEL org.opencontainers.image.authors="us@couchbits.com"
 LABEL org.opencontainers.image.vendor="couchbits GmbH"
 
-COPY --chown=$MAMBA_USER:$MAMBA_USER environment.yml /tmp/env.yaml
-RUN micromamba install -y -n base -f /tmp/env.yaml && \
-    micromamba clean --all --yes
+ENV PROJECT_DIR /moveapps-python-sdk
+ENV ENV_PREFIX=${PROJECT_DIR}/conda
 
 # the app
-ENV PROJECT_DIR /moveapps-python-sdk
 WORKDIR $PROJECT_DIR
-COPY --chown=$MAMBA_USER:$MAMBA_USER sdk.py ./
-COPY --chown=$MAMBA_USER:$MAMBA_USER sdk/ ./sdk/
-COPY --chown=$MAMBA_USER:$MAMBA_USER resources/ ./resources/
-COPY --chown=$MAMBA_USER:$MAMBA_USER tests/ ./tests/
-COPY --chown=$MAMBA_USER:$MAMBA_USER app/ ./app/
-RUN ls -al
+COPY sdk.py environment.yml ./
+COPY sdk/ ./sdk/
+COPY resources/ ./resources/
+COPY tests/ ./tests/
+COPY app/ ./app/
+RUN conda env create --prefix ${ENV_PREFIX}  --file environment.yml && \
+    conda clean --all --yes
 
-RUN micromamba run -n base python -m unittest
+RUN conda run --prefix ${ENV_PREFIX} python3 -m unittest

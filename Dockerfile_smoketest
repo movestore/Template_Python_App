@@ -1,0 +1,34 @@
+# This more like a (basic) recipe to smoke-test the app in a docker container
+# It is NOT the actual Dockerfile which is used in production at MoveApps.
+FROM condaforge/miniforge3:latest
+LABEL org.opencontainers.image.authors="us@couchbits.com"
+LABEL org.opencontainers.image.vendor="couchbits GmbH"
+
+# if you need to install any OS libraries use the following snippet
+# USER root
+# RUN apt-get update \
+#     && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+#     # install qgis
+#     lib-a lib-b \
+# ./en os-lib install snippet
+
+# create working dir
+ENV PROJECT_DIR=/opt/co-pilot-python
+ENV ENV_PREFIX=$PROJECT_DIR/conda
+RUN mkdir $PROJECT_DIR
+
+# Security Aspects
+ENV UID=moveapps
+ENV GID=moveapps
+RUN addgroup --system $GID && adduser --system $UID --ingroup $GID
+RUN chown $UID:$GID $PROJECT_DIR
+
+USER $UID:$GID
+WORKDIR $PROJECT_DIR
+
+# setup runtime environment
+COPY --chown=$UID:$GID . $PROJECT_DIR
+RUN conda env create --prefix $ENV_PREFIX --file $PROJECT_DIR/environment.yml && \
+    conda clean --all --yes
+
+ENTRYPOINT [ "conda", "run", "--prefix", "${ENV_PREFIX}", "python3", "sdk.py" ]
