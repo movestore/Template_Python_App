@@ -31,4 +31,4 @@ COPY --chown=$UID:$GID . $PROJECT_DIR
 RUN conda env create --prefix $ENV_PREFIX --file $PROJECT_DIR/environment.yml && \
     conda clean --all --yes
 
-ENTRYPOINT [ "conda", "run", "--prefix", "${ENV_PREFIX}", "python3", "sdk.py" ]
+ENTRYPOINT [ "conda", "run", "--no-capture-output", "--prefix", "${ENV_PREFIX}", "python3", "sdk.py" ]
