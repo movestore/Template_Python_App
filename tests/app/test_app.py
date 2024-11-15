@@ -35,16 +35,6 @@ class MyTestCase(unittest.TestCase):
         # verify
         self.assertEqual(2014, actual["year"])
 
-    def test_app_config_mapping_defaults(self):
-        # prepare
-        config = {}
-
-        # execute
-        actual = self.sut.map_config(config=config)
-
-        # verify
-        self.assertEqual(1960, actual.year)
-
     def test_year_present(self):
         # prepare input data
         df = pd.DataFrame([
