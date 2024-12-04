@@ -9,6 +9,13 @@
       "type": "STRING"
     },
     {
+      "id": "year",
+      "name": "The year",
+      "description": "Enter the year for which you want to keep the data",
+      "defaultValue": 1960,
+      "type": "INTEGER"
+    },
+    {
       "id": "auxiliary-file-a",
       "name": "Your message",
       "description": "You can personalize the app by providing a file.",
