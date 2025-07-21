@@ -33,6 +33,8 @@ Critical parts of the SDK can be adjusted by `environment variables`. Keep in mi
 
 - `SOURCE_FILE`: path to the input file for your App.
 - `CONFIGURATION_FILE`: path to the configuration/settings file of your App (in [JSON](https://www.w3schools.com/js/js_json_intro.asp) format - must correspondent with the `settings` of your `appspec.json`, see [MoveApps parameters](https://docs.moveapps.org/#/copilot-python-sdk.md#moveapps-parameters) for an example of the `app-configuration.json` file).
+- `PRINT_CONFIGURATION`: prints the configuration your App receives (`yes|no`)
+- `MASK_SETTING_IDS`: A comma-separated list of setting IDs whose values will be hidden in the SDK logs
 
 You can adjust these environment variables by adjusting the file `./.env`.
 

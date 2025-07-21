@@ -59,10 +59,22 @@ class MoveAppsExecutor:
         else:
             config = os.environ.get('CONFIGURATION', '{}')
             parsed = json.loads(config)
-        if os.environ.get("PRINT_CONFIGURATION", "no") == "yes":
-            logging.info(f'app will be started with configuration: {parsed}')
-        return parsed
 
+        if os.environ.get("PRINT_CONFIGURATION", "no") == "yes":
+            # Create a copy of parsed for logging
+            logging_config = parsed.copy()
+            # Get and process MASK_SETTING_IDS
+            mask_setting_ids = os.environ.get('MASK_SETTING_IDS', '').strip()
+            if mask_setting_ids:
+                # Split by comma and trim each value
+                mask_keys = [key.strip() for key in mask_setting_ids.split(',')]
+                # Replace values with "***masked***" for specified keys in the logging copy
+                for key in mask_keys:
+                    if key in logging_config:
+                        logging_config[key] = "***masked***"
+            logging.info(f'app will be started with configuration: {logging_config}')
+        return parsed
+    
     def __store_output(self, data):
         logging.info(f'storing output: {data}')
         pd.to_pickle(data, self.env.output_file)
