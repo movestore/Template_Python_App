@@ -1,5 +1,13 @@
 # Changelog SDK
 
+## 2025-07 `v2.3.0`
+
+- introduce app-setting-type `SECRET`
+
+## 2024-09
+
+- switch to [miniforge](https://github.com/conda-forge/miniforge)
+
 ## 2024-03 `v2.1.0`
 
 - introduce app-setting-type `USER_FILE`
