@@ -4,7 +4,7 @@
 
 - introduce app-setting-type `SECRET`
 
-## 2024-09
+## 2024-09 `v2.2.1`
 
 - switch to [miniforge](https://github.com/conda-forge/miniforge)
 
