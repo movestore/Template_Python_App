@@ -15,7 +15,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_app_runs(self):
         # prepare
-        data: mpd.TrajectoryCollection = pd.read_pickle(os.path.join(ROOT_DIR, 'tests/resources/app/input4_LatLon.pickle'))
+        data: mpd.TrajectoryCollection = pd.read_pickle(os.path.join(ROOT_DIR, 'tests/resources/app/input4_LatLon.pickle.gz'))
         config: dict = {
             "year": 2014
         }
@@ -124,7 +124,7 @@ class MyTestCase(unittest.TestCase):
     # Use this test if the App should return the input data
     def test_app_returns_input(self):
         # prepare
-        expected: mpd.TrajectoryCollection = pd.read_pickle(os.path.join(ROOT_DIR, 'tests/resources/app/input2_LatLon.pickle'))
+        expected: mpd.TrajectoryCollection = pd.read_pickle(os.path.join(ROOT_DIR, 'tests/resources/app/input2_LatLon.pickle.gz'))
         config: dict = {}
 
         # execute

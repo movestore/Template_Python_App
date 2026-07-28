@@ -14,16 +14,16 @@ Set of input data to test apps.
 - data are provided in "lat/long" (EPSG:4326) and projected to "Mollweide" (ESRI:54009) in order to test your app accordingly for not projected and projected data. If your app does not allow projected data or only can deal with projected data, document and either build a automatic transformation in the app or make it fail with an informative error message. The app "Change projection" can be refered to for the user to change the projection of the data acordingly previous to your app.
 
 *File names*
-input1_LatLon.pickle
-input1_Mollweide.pickle
+input1_LatLon.pickle.gz
+input1_Mollweide.pickle.gz
 
-input2_LatLon.pickle
-input2_Mollweide.pickle
+input2_LatLon.pickle.gz
+input2_Mollweide.pickle.gz
 
-input3_LatLon.pickle
-input3_Mollweide.pickle
+input3_LatLon.pickle.gz
+input3_Mollweide.pickle.gz
 
-input4_LatLon.pickle
-input4_Mollweide.pickle
+input4_LatLon.pickle.gz
+input4_Mollweide.pickle.gz
 
 

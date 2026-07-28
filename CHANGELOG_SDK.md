@@ -1,5 +1,10 @@
 # Changelog SDK
 
+## 2026-07 `v2.4.0`
+
+- the App output (`output.pickle.gz`) is now written as a gzip-compressed pickle. Compression is inferred from the `OUTPUT_FILE` and `SOURCE_FILE` extension, so uncompressed `.pickle` files are still supported.
+- shipped sample and test input files are now gzip-compressed (`.pickle.gz`).
+
 ## 2025-07 `v2.3.0`
 
 - introduce app-setting-type `SECRET`
