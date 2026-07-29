@@ -1,10 +1,11 @@
-import pandas as pd
 import json
 import os
 import logging
 import pluggy
 from dotenv import load_dotenv
 from dataclasses import dataclass
+
+from sdk.moveapps_pickle import MoveAppsPickle
 
 
 @dataclass
@@ -49,7 +50,7 @@ class MoveAppsExecutor:
         )
 
     def __load_input(self):
-        return pd.read_pickle(self.env.source_file)
+        return MoveAppsPickle.read(path=self.env.source_file)
 
     @staticmethod
     def __load_config():
@@ -77,7 +78,7 @@ class MoveAppsExecutor:
     
     def __store_output(self, data):
         logging.info(f'storing output: {data}')
-        pd.to_pickle(data, self.env.output_file)
+        MoveAppsPickle.write(data=data, path=self.env.output_file)
 
     def __store_error(self, error: Exception):
         logging.info(f'storing error to {self.env.error_file}')

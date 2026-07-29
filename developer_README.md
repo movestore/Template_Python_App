@@ -31,8 +31,8 @@ Here you find an overview of the files and their function in the SDK:
 
 Critical parts of the SDK can be adjusted by `environment variables`. Keep in mind that these variables are only changeable during App development and not during an App run on MoveApps. They are predefined with sensible defaults - they should work for you as they are.  While testing your App you will want to modify the SOURCE_FILE variable to either call the different example data sets provided in the template or other data sets that you want to use to test your App.
 
-- `SOURCE_FILE`: path to the input file for your App (`.pickle.gz`).
-- `OUTPUT_FILE`: path to the output file of your App, ie the data that is passed on to the next App in a Workflow (default: `resources/output/output.pickle.gz`).
+- `SOURCE_FILE`: path to the input file for your App. Gzip-compressed (`.pickle.gz`) or uncompressed - the SDK detects which from the file content, not from the file name.
+- `OUTPUT_FILE`: path to the output file of your App, ie the data that is passed on to the next App in a Workflow (default: `resources/output/output.pickle.gz`). The SDK always writes it gzip-compressed.
 - `ERROR_FILE`: path to the file the SDK writes the error message to in case your App raises an exception (default: `resources/output/error.txt`).
 - `CONFIGURATION_FILE`: path to the configuration/settings file of your App (in [JSON](https://www.w3schools.com/js/js_json_intro.asp) format - must correspondent with the `settings` of your `appspec.json`, see [MoveApps parameters](https://docs.moveapps.org/#/copilot-python-sdk.md#moveapps-parameters) for an example of the `app-configuration.json` file).
 - `PRINT_CONFIGURATION`: prints the configuration your App receives (`yes|no`)
