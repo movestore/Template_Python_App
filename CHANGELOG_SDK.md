@@ -1,5 +1,14 @@
 # Changelog SDK
 
+## 2026-09 `v3.1.0`
+
+- the template now pins `python=3.14` (was 3.11).
+
+**This does not change your App.** `environment.yml` is excluded from the template sync, so
+your repository keeps its own. If you want the newer Python, edit your `environment.yml`
+yourself and rebuild - and check what your dependencies resolve to afterwards, because conda
+resolves them against today's conda-forge, not against the day your App was first built.
+
 ## 2026-07 `v3.0.0`
 
 **Breaking change.** The App output is now always written as a gzip-compressed pickle. Apps built

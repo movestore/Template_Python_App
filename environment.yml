@@ -2,7 +2,7 @@ name: moveapps-python-sdk
 channels:
   - conda-forge
 dependencies:
-  - python=3.11
+  - python=3.14
   - pandas
   - geopandas
   - movingpandas
