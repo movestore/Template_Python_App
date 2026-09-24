@@ -23,7 +23,7 @@ Here you find an overview of the files and their function in the SDK:
 1. `.env`: adjust for App testing. defining the SDK Runtime environment, see below. See [Step 5](https://docs.moveapps.org/#/create_py_app?id=step-5-test-your-app-locally)
 1. `./resources/**`: use for App testing. Resources of the SDK
    1. `auxiliary/**`: Simulates the usage of [*auxiliary files*](https://docs.moveapps.org/#/auxiliary). You can put files into this folder to simulate an App run with provided/user-uploaded files. 
-   1. `output/**`: The output data (`output.pickle`) that will be passed on to the next App in a Workflow and other output files (artifacts) that your App may produce will be stored here. See [*producing artifacts*](https://docs.moveapps.org/#/copilot-python-sdk?id=producing-artifacts) for more information.
+   1. `output/**`: The output data (`output.pickle.gz`) that will be passed on to the next App in a Workflow and other output files (artifacts) that your App may produce will be stored here. See [*producing artifacts*](https://docs.moveapps.org/#/copilot-python-sdk?id=producing-artifacts) for more information.
    1. `samples/**`: Collection of sample App input data. You can use these data to test an App run with real input.
 
 
@@ -31,7 +31,9 @@ Here you find an overview of the files and their function in the SDK:
 
 Critical parts of the SDK can be adjusted by `environment variables`. Keep in mind that these variables are only changeable during App development and not during an App run on MoveApps. They are predefined with sensible defaults - they should work for you as they are.  While testing your App you will want to modify the SOURCE_FILE variable to either call the different example data sets provided in the template or other data sets that you want to use to test your App.
 
-- `SOURCE_FILE`: path to the input file for your App.
+- `SOURCE_FILE`: path to the input file for your App. Gzip-compressed (`.pickle.gz`) or uncompressed - the SDK detects which from the file content, not from the file name.
+- `OUTPUT_FILE`: path to the output file of your App, ie the data that is passed on to the next App in a Workflow (default: `resources/output/output.pickle.gz`). The SDK always writes it gzip-compressed.
+- `ERROR_FILE`: path to the file the SDK writes the error message to in case your App raises an exception (default: `resources/output/error.txt`).
 - `CONFIGURATION_FILE`: path to the configuration/settings file of your App (in [JSON](https://www.w3schools.com/js/js_json_intro.asp) format - must correspondent with the `settings` of your `appspec.json`, see [MoveApps parameters](https://docs.moveapps.org/#/copilot-python-sdk.md#moveapps-parameters) for an example of the `app-configuration.json` file).
 - `PRINT_CONFIGURATION`: prints the configuration your App receives (`yes|no`)
 - `MASK_SETTING_IDS`: A comma-separated list of setting IDs whose values will be hidden in the SDK logs

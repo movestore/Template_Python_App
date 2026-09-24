@@ -63,5 +63,5 @@ if __name__ == '__main__':
         file = f'input{i}'
         converter.csv_to_pickle(
             csv_path=f'./resources/input/{file}',
-            result_file_name=f'{ROOT_DIR}/resources/samples/{file}.pickle'
+            result_file_name=f'{ROOT_DIR}/resources/samples/{file}.pickle.gz'
         )
