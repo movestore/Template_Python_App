@@ -1,5 +1,11 @@
 # Changelog SDK
 
+## [Unreleased]
+
+### Changed
+- Updated `README.md` including new sections
+- Updated `MovingPandas Trajectory Collection` input files
+
 ## 2026-09 `v3.1.0`
 
 - the template now pins `python=3.14` (was 3.11).
