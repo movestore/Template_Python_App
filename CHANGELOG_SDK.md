@@ -1,8 +1,6 @@
 # Changelog SDK
 
-## [Unreleased]
-
-### Changed
+## 2026-09 `v3.1.1`
 - Updated `README.md` including new sections
 - Updated `MovingPandas Trajectory Collection` input files
 
