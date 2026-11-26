@@ -1,5 +1,10 @@
 # Changelog SDK
 
+## 2026-11 `v3.1.2`
+
+- deleted deprecated auxiliary/local-files folder
+- added input5 with large number of individuals
+
 ## 2026-09 `v3.1.1`
 
 - Updated `README.md` including new sections

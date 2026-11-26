@@ -5,6 +5,7 @@ Set of input data to test apps.
 - input2: 3 storks, median fix rate = 1sec, tracking duration 2 weeks, gps, local movement
 - input3: 1 stork, one track per deployment, median fix rate = 1h | 1day | 1 week, tracking duration 11.5 years, argos, includes migration
 - input4: 3 geese, median fix rate = 1h | 4h, tracking duration 1.5 years, gps, includes migration
+- input5: 50 storks, median fix rate = 1sec, tracking duration 5 days, gps, includes migration
 
 *I/O types*
 - all data sets are provided as 'MovingPandas.TrajectoryCollection'
@@ -25,5 +26,7 @@ input3_Mollweide.pickle
 
 input4_LatLon.pickle
 input4_Mollweide.pickle
+
+input5_LatLon.pickle
 
 
